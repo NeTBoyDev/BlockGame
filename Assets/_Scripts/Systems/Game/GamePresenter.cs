@@ -26,9 +26,12 @@ public class GamePresenter : MonoBehaviour
     {
         if (!block)
             return;
-        
-        if(_currentInteractingBlock != null)
+
+        if (_currentInteractingBlock != null)
+        {
             _currentInteractingBlock.DestroyBlock();
+            _logger.Log("block_destroy");
+        }
         
         _currentInteractingBlock = block;
         _currentInteractingBlock?.StartDrag();
@@ -69,6 +72,7 @@ public class GamePresenter : MonoBehaviour
             { "block_loaded", "Blocks has been loaded!" },
             { "block_limited", "Tower is full!" },
             { "block_unlimited", "Now tower is not full!" },
+            { "block_destroy", "Block was destroyed!" },
             
         };
         
@@ -111,6 +115,7 @@ public class GamePresenter : MonoBehaviour
         if (!_placementService.CanPlace(block,_model.Tower))
         {
             block.DestroyBlock();
+            _logger.Log("block_destroy");
             return;
         }
 
