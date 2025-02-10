@@ -66,7 +66,10 @@ public class GamePresenter : MonoBehaviour
             { "block_taken", "Block has been taken!" },
             { "block_released", "Block has been released!" },
             { "block_trashed", "Block has been trashed!" },
-            { "block_loaded", "Blocks has been loaded!" }
+            { "block_loaded", "Blocks has been loaded!" },
+            { "block_limited", "Tower is full!" },
+            { "block_unlimited", "Now tower is not full!" },
+            
         };
         
         _logger.LoadLocalization(localization);
@@ -148,10 +151,12 @@ public class GamePresenter : MonoBehaviour
         if (isTowerFull)
         {
             _view.DisableBlockList();
+            _logger.Log("block_limited");
         }
         else
         {
             _view.EnableBlockList();
+            _logger.Log("block_unlimited");
         }
     }
 
