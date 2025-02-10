@@ -71,7 +71,6 @@ public class GamePresenter : MonoBehaviour
             { "block_trashed", "Block has been trashed!" },
             { "block_loaded", "Blocks has been loaded!" },
             { "block_limited", "Tower is full!" },
-            { "block_unlimited", "Now tower is not full!" },
             { "block_destroy", "Block was destroyed!" },
             
         };
@@ -161,7 +160,6 @@ public class GamePresenter : MonoBehaviour
         else
         {
             _view.EnableBlockList();
-            _logger.Log("block_unlimited");
         }
     }
 
