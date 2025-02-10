@@ -76,6 +76,9 @@ public class GamePresenter : MonoBehaviour
         if (!block)
             return;
         
+        if(_currentInteractingBlock != null)
+            _currentInteractingBlock.DestroyBlock();
+        
         _currentInteractingBlock = block;
         _currentInteractingBlock?.StartDrag();
         
