@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using _Scripts.Abstractions;
-using _Scripts.Entities.Block;
 using _Scripts.Factory;
-using Cysharp.Threading.Tasks;
 using DI;
-using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +25,18 @@ namespace _Scripts.Systems.Game
             _scrollGroup = _scrollRect.GetComponent<CanvasGroup>();
         }
 
+        public void DisableBlockList()
+        {
+            _scrollGroup.blocksRaycasts = false;
+            _scrollGroup.alpha = .6f;
+        }
+
+        public void EnableBlockList()
+        {
+            _scrollGroup.blocksRaycasts = true;
+            _scrollGroup.alpha = 1f;
+        }
+        
         private void InitializeBlockList(List<BlockModelBase> blocks)
         {
             foreach (var block in blocks)
@@ -43,18 +51,6 @@ namespace _Scripts.Systems.Game
         private void InitializeScrollBackGround()
         {
             _backgroundScrollSystem.StartScroll();
-        }
-
-        public void DisableBlockList()
-        {
-            _scrollGroup.blocksRaycasts = false;
-            _scrollGroup.alpha = .6f;
-        }
-
-        public void EnableBlockList()
-        {
-            _scrollGroup.blocksRaycasts = true;
-            _scrollGroup.alpha = 1f;
         }
     }
 }

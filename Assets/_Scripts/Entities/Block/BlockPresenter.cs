@@ -7,6 +7,9 @@ namespace _Scripts.Entities.Block
         public override void DestroyBlock()
         {
             Play(Model.DestroyClip);
+            
+            gameObject.layer = 0;
+            
             var viewTween = View.DestroyBlock();
             viewTween.onComplete += () => base.DestroyBlock();
         }

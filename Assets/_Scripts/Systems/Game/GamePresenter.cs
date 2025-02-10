@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Abstractions;
 using _Scripts.Abstractions.Interfaces;
-using _Scripts.Services;
 using _Scripts.Systems.Game;
 using DI;
 using UnityEngine;
@@ -23,53 +21,6 @@ public class GamePresenter : MonoBehaviour
 
     private BlockPresenterBase _currentInteractingBlock;
     private const string BLOCK_LAYER_NAME = "Block";
-
-    private void Start()
-    {
-        _blockTouchSystem.OnPointerDown += TryGetBlock;
-        _blockTouchSystem.OnPointerMove += MoveBlock;
-        _blockTouchSystem.OnPointerUp += ReleaseBlock;
-        
-        _view.Initialize(_model.BlockModels);
-        _blockTouchSystem.StartDetection();
-
-        var loadedData = _saveService.Load(_model.BlockModels.First());
-
-        if (loadedData != null && loadedData.Count > 0)
-        {
-            _model.AddRange(loadedData);
-            _currentInteractingBlock = null;
-            UpdateBlockListState();
-            
-            _logger.Log("block_loaded");
-        }
-    }
-
-    public void PlaceBlock(BlockPresenterBase block)
-    {
-        if (!block)
-            return;
-
-        if (_trashService.MayTrash(block))
-        {
-            _trashService.Trash(block);
-            _logger.Log("block_trashed");
-            return;
-        }
-        
-        if (!_placementService.CanPlace(block,_model.Tower))
-        {
-            block.DestroyBlock();
-            return;
-        }
-
-        _placementService.Place(block, _model.Tower);
-        _model.AddBlock(block);
-        
-        _logger.Log("block_placed");
-        
-        UpdateBlockListState();
-    }
 
     public void SetBlock(BlockPresenterBase block)
     {
@@ -94,6 +45,76 @@ public class GamePresenter : MonoBehaviour
         {
             PlaceBlock(blockItem);
         }
+        
+        UpdateBlockListState();
+    }
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        Dictionary<string, string> localization = new()
+        {
+            { "block_placed", "Block has been placed!" },
+            { "block_taken", "Block has been taken!" },
+            { "block_released", "Block has been released!" },
+            { "block_trashed", "Block has been trashed!" },
+            { "block_loaded", "Blocks has been loaded!" }
+        };
+        
+        _logger.LoadLocalization(localization);
+    }
+    
+    private void Start()
+    {
+        _blockTouchSystem.OnPointerDown += TryGetBlock;
+        _blockTouchSystem.OnPointerMove += MoveBlock;
+        _blockTouchSystem.OnPointerUp += ReleaseBlock;
+        
+        _view.Initialize(_model.BlockModels);
+        _blockTouchSystem.StartDetection();
+
+        var loadedData = _saveService.Load(_model.BlockModels.First());
+
+        if (loadedData != null && loadedData.Count > 0)
+        {
+            _model.AddRange(loadedData);
+            _currentInteractingBlock = null;
+            UpdateBlockListState();
+            
+            _logger.Log("block_loaded");
+        }
+    }
+    
+    private void PlaceBlock(BlockPresenterBase block)
+    {
+        if (!block)
+            return;
+
+        if (_trashService.MayTrash(block))
+        {
+            _trashService.Trash(block);
+            _logger.Log("block_trashed");
+            return;
+        }
+        
+        if (!_placementService.CanPlace(block,_model.Tower))
+        {
+            block.DestroyBlock();
+            return;
+        }
+
+        _placementService.Place(block, _model.Tower);
+        _model.AddBlock(block);
+        
+        _logger.Log("block_placed");
         
         UpdateBlockListState();
     }
@@ -132,29 +153,6 @@ public class GamePresenter : MonoBehaviour
         {
             _view.EnableBlockList();
         }
-    }
-    
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
-        Dictionary<string, string> localization = new()
-        {
-            { "block_placed", "Block has been placed!" },
-            { "block_taken", "Block has been taken!" },
-            { "block_released", "Block has been released!" },
-            { "block_trashed", "Block has been trashed!" },
-            { "block_loaded", "Blocks has been loaded!" }
-        };
-        
-        _logger.LoadLocalization(localization);
     }
 
     private void OnApplicationQuit()

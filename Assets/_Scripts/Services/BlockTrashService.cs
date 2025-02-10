@@ -1,11 +1,9 @@
 using System;
 using _Scripts.Abstractions;
 using _Scripts.Abstractions.Interfaces;
-using _Scripts.Entities.Block;
 using DG.Tweening;
 using DI;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace _Scripts.Services
 {
@@ -25,20 +23,6 @@ namespace _Scripts.Services
 
             PositionTrashHole();
         }
-
-        private void PositionTrashHole()
-        {
-            var screenPositionX = CalculateTrashHoleXPosition();
-            var worldPositionY = _trashHoleCollider.gameObject.transform.position.y;
-
-            _trashHoleCollider.gameObject.transform.position = new Vector3(screenPositionX, worldPositionY);
-        }
-
-        private float CalculateTrashHoleXPosition()
-        {
-            var screenToWorldPoint = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 4, 0));
-            return screenToWorldPoint.x;
-        }
         
         public void Trash(BlockPresenterBase block)
         {
@@ -57,16 +41,7 @@ namespace _Scripts.Services
             MoveBlockToTrash(block);
         }
         
-        private void MoveBlockToTrash(BlockPresenterBase block)
-        {
-            var targetPosition = _trashHoleCollider.bounds.center;
-            var distance = Vector3.Distance(targetPosition, block.transform.position);
-            
-            var moveTween = block.transform.DOMove(targetPosition, distance / 3).SetEase(Ease.OutQuad);
-            moveTween.onComplete += () => block.DestroyBlock();
-            
-            block.HideUnderMask();
-        }
+        
 
         public bool MayTrash(BlockPresenterBase block)
         {
@@ -80,6 +55,31 @@ namespace _Scripts.Services
             var isWithinHorizontalBounds = _boundsChecker.IsWithinBounds(_trashHoleCollider.bounds, block.Collider.bounds);
 
             return isAboveTrashHole && isWithinHorizontalBounds;
+        }
+        
+        private void MoveBlockToTrash(BlockPresenterBase block)
+        {
+            var targetPosition = _trashHoleCollider.bounds.center;
+            var distance = Vector3.Distance(targetPosition, block.transform.position);
+            
+            var moveTween = block.transform.DOMove(targetPosition, distance / 3).SetEase(Ease.OutQuad);
+            moveTween.onComplete += () => block.DestroyBlock();
+            
+            block.HideUnderMask();
+        }
+        
+        private void PositionTrashHole()
+        {
+            var screenPositionX = CalculateTrashHoleXPosition();
+            var worldPositionY = _trashHoleCollider.gameObject.transform.position.y;
+
+            _trashHoleCollider.gameObject.transform.position = new Vector3(screenPositionX, worldPositionY);
+        }
+
+        private float CalculateTrashHoleXPosition()
+        {
+            var screenToWorldPoint = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 4, 0));
+            return screenToWorldPoint.x;
         }
     }
 }

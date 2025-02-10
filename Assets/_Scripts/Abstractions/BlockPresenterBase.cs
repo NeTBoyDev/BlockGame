@@ -1,8 +1,5 @@
 using System;
-using System.Threading;
 using _Scripts.Entities.Block;
-using _Scripts.Systems.Game;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;

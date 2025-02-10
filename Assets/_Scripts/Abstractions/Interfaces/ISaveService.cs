@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace _Scripts.Abstractions.Interfaces
 {
     public interface ISaveService<T>

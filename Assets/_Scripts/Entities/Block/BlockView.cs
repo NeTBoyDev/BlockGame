@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -10,10 +9,6 @@ namespace _Scripts.Entities.Block
     public class BlockView : MonoBehaviour
     {
         public SpriteRenderer _spriteRenderer { get; private set; }
-        private void Start()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
 
         public void SetSprite(Sprite sprite)
         {
@@ -53,6 +48,12 @@ namespace _Scripts.Entities.Block
         public void HideUnderMask()
         {
             _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+        }
+        
+        
+        private void Start()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 }
