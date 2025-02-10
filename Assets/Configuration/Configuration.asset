@@ -35,6 +35,24 @@ MonoBehaviour:
     <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
   - <Color>k__BackingField: {r: 0.6698113, g: 0.4106048, b: 0.11690103, a: 1}
     <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.26476398, g: 0.67058825, b: 0.11764705, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.67058825, g: 0.11764705, b: 0.14109881, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.67058825, g: 0.11764705, b: 0.51442707, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.2962502, g: 0.11764705, b: 0.67058825, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.11764705, g: 0.42310634, b: 0.67058825, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.11764705, g: 0.59528494, b: 0.67058825, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0.11764705, g: 0.67058825, b: 0.65879, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
+  - <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <Sprite>k__BackingField: {fileID: 21300000, guid: 62cd59e3f31721146a760364345fb233, type: 3}
   <ScrollMaterials>k__BackingField:
   - {fileID: 2100000, guid: 8fd6a4a5c2cab0f43aa11a7fbbe7e31b, type: 2}
   - {fileID: 2100000, guid: f4dfcbf82d6e410448c7c0866be80133, type: 2}
